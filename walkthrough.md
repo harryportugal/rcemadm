@@ -54,6 +54,15 @@ Todas as informações de negócio, métricas, cálculos, rotas, filtros e funci
 - **Solução Implementada:** Substituição por 2 botões compactos (`.vance-btn sm`), com ícones direcionais sutis e ações reais de fluxo de caixa:
   1. **Entradas** (Acento verde $\rightarrow$ direciona para `/financeiro/recebimentos`).
   2. **Saídas** (Neutro refinado $\rightarrow$ direciona para `/financeiro/repasses`).
+
+### Card de Liquidação Pix Animado (`PixTransferCard`)
+- **Inspiração:** Card de Transferência Pix com feixe de luz dinâmico.
+- **Adaptação para RCEM:**
+  - Feixe contínuo em gradiente com o verde esmeralda oficial (`linear-gradient(90deg, transparent 0%, rgba(21, 154, 106, 0.45) 50%, transparent 100%)`).
+  - Badge de origem com o símbolo vetorizado oficial da RCEM (`RcemSymbol`).
+  - Círculo central com seta direcional verde e badge do parceiro/cliente de destino.
+  - Animação suave `transferBeam` de 2.4s com transições de opacidade e loop infinito.
+- **Integração:** Inserido no card de **Fluxo de Caixa** no Dashboard principal.
 - **Resultado:** Proporção perfeita com o restante do card, sem repetição de termos e com navegação lógica para entradas e saídas de capital.
 
 ---

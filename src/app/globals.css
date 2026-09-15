@@ -882,3 +882,106 @@ strong, b, .font-medium, button {
   }
 }
 
+/* 8.2 LIVE RADAR PULSE DOT */
+.live-radar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+}
+
+.live-radar-core {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-green);
+  z-index: 2;
+}
+
+.live-radar-ping {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: var(--accent-green);
+  opacity: 0.6;
+  animation: radarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  z-index: 1;
+}
+
+@keyframes radarPing {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.9;
+  }
+  75%, 100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* 8.3 PROGRESS BAR LIVE LIGHT SHIMMER */
+.live-progress-fill {
+  position: relative;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background-color: var(--accent-green);
+  overflow: hidden;
+}
+
+.live-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -40%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.65) 50%, transparent 100%);
+  animation: progressShimmer 2.2s infinite ease-in-out;
+}
+
+@keyframes progressShimmer {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 140%;
+  }
+}
+
+/* 8.4 CHART POINT PULSE */
+@keyframes chartPointPulse {
+  0% {
+    r: 3.5;
+    opacity: 1;
+  }
+  50% {
+    r: 6;
+    opacity: 0.5;
+  }
+  100% {
+    r: 3.5;
+    opacity: 1;
+  }
+}
+
+.chart-pulsing-dot {
+  animation: chartPointPulse 2s infinite ease-in-out;
+  transform-origin: center;
+}
+
+/* 8.5 CARD HOVER MICRO-ANIMATION */
+.vance-interactive-tile {
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+}
+
+.vance-interactive-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+

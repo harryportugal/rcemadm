@@ -151,9 +151,15 @@ export default function DashboardPage() {
             <h1 style={{ fontSize: '24px', margin: 0, fontWeight: 600 }}>
               Olá, Henrique
             </h1>
-            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px', margin: 0 }}>
-              88 Contratos Ativos • {selectedMonth}
-            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
+              <span className="live-radar" title="Operação em Tempo Real">
+                <span className="live-radar-ping" />
+                <span className="live-radar-core" />
+              </span>
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
+                88 Contratos Ativos • Sistema em Tempo Real • {selectedMonth}
+              </p>
+            </div>
           </div>
 
           {/* Action Buttons */}
@@ -162,7 +168,7 @@ export default function DashboardPage() {
               <span className="vance-getstarted-text">Recebimento</span>
               <span className="vance-getstarted-badge">
                 <svg className="icon-svg icon-sm" viewBox="0 0 24 24">
-                  <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1 2-1V2l-2 1-2-1-2 1-2-1-2 1-2-1z" />
+                  <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1V2l-2 1-2-1-2 1-2-1-2 1-2-1z" />
                   <path d="m9 12 2 2 4-4" />
                 </svg>
               </span>
@@ -179,35 +185,36 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Global Regularity Indicator */}
+        {/* Global Regularity Indicator with Live Shimmer */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '13px' }}>
-            <span style={{ color: 'var(--text-muted)' }}>Regularidade da Carteira</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ color: 'var(--text-muted)' }}>Regularidade da Carteira</span>
+              <span className="vance-badge green" style={{ fontSize: '9.5px', padding: '2px 7px' }}>Alta Performance</span>
+            </div>
             <span className="tnum" style={{ color: 'var(--accent-green)', fontWeight: 500 }}>
               96,6% em dia
             </span>
           </div>
           <div
             style={{
-              height: '6px',
+              height: '7px',
               backgroundColor: 'var(--bg-surface)',
               borderRadius: 'var(--radius-pill)',
               overflow: 'hidden',
             }}
           >
             <div
+              className="live-progress-fill"
               style={{
-                height: '100%',
                 width: '96.6%',
-                backgroundColor: 'var(--accent-green)',
-                borderRadius: 'var(--radius-pill)',
                 transition: 'width 0.6s cubic-bezier(0.25, 1, 0.5, 1)',
               }}
             />
           </div>
         </div>
 
-        {/* 4 Micro-Tiles Grid (Pure White, Borderless, No-Wrap Layout) */}
+        {/* 4 Micro-Tiles Grid (Interactive Animated Tiles) */}
         <div
           className="vance-hero-tiles"
           style={{
@@ -221,7 +228,7 @@ export default function DashboardPage() {
         >
           {/* Tile 1: Próximo Vencimento */}
           <div
-            className="vance-cascade-item delay-2"
+            className="vance-cascade-item delay-2 vance-interactive-tile"
             style={{
               backgroundColor: 'var(--bg-surface)',
               padding: '12px 14px',
@@ -268,7 +275,7 @@ export default function DashboardPage() {
 
           {/* Tile 2: Linhas de Cobrança */}
           <div
-            className="vance-cascade-item delay-3"
+            className="vance-cascade-item delay-3 vance-interactive-tile"
             style={{
               backgroundColor: 'var(--bg-surface)',
               padding: '12px 14px',
@@ -309,7 +316,7 @@ export default function DashboardPage() {
           {/* Tile 3: Pendências KYC */}
           <Link
             href="/solicitacoes"
-            className="vance-cascade-item delay-4"
+            className="vance-cascade-item delay-4 vance-interactive-tile"
             style={{
               backgroundColor: 'var(--bg-surface)',
               padding: '12px 14px',
@@ -339,8 +346,14 @@ export default function DashboardPage() {
               </svg>
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>
-                Fila KYC
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>
+                  Fila KYC
+                </span>
+                <span className="live-radar" style={{ width: '6px', height: '6px' }}>
+                  <span className="live-radar-ping" style={{ width: '12px', height: '12px' }} />
+                  <span className="live-radar-core" style={{ width: '5px', height: '5px' }} />
+                </span>
               </div>
               <div className="tnum" style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-main)', whiteSpace: 'nowrap' }}>
                 3 pendentes
@@ -350,7 +363,7 @@ export default function DashboardPage() {
 
           {/* Tile 4: Volume Liquidado Hoje */}
           <div
-            className="vance-cascade-item delay-5"
+            className="vance-cascade-item delay-5 vance-interactive-tile"
             style={{
               backgroundColor: 'var(--bg-surface)',
               padding: '12px 14px',
@@ -379,8 +392,14 @@ export default function DashboardPage() {
               </svg>
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>
-                Liquidado Hoje
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>
+                  Liquidado Hoje
+                </span>
+                <span className="live-radar" style={{ width: '6px', height: '6px' }}>
+                  <span className="live-radar-ping" style={{ width: '12px', height: '12px' }} />
+                  <span className="live-radar-core" style={{ width: '5px', height: '5px' }} />
+                </span>
               </div>
               <div className="tnum" style={{ fontSize: '13px', fontWeight: 500, color: 'var(--accent-green)', whiteSpace: 'nowrap' }}>
                 R$ 1.850,00
@@ -399,6 +418,10 @@ export default function DashboardPage() {
         <div className="vance-card vance-cascade-item delay-6" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span className="live-radar">
+                <span className="live-radar-ping" />
+                <span className="live-radar-core" />
+              </span>
               <svg className="icon-svg icon-sm" viewBox="0 0 24 24">
                 <rect width="18" height="18" x="3" y="3" rx="2" />
                 <path d="m9 12 2 2 4-4" />
@@ -453,12 +476,13 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Compact Item List */}
+          {/* Compact Item List with Interactive Tiles */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {filteredKyc.map((item) => (
               <Link
                 key={item.id}
                 href="/solicitacao-detalhe"
+                className="vance-interactive-tile"
                 style={{
                   backgroundColor: 'var(--bg-surface)',
                   borderRadius: '14px',
@@ -467,7 +491,6 @@ export default function DashboardPage() {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   textDecoration: 'none',
-                  transition: 'transform var(--transition-fast)',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -610,7 +633,7 @@ export default function DashboardPage() {
             receiverBadge="P"
           />
 
-          {/* SVG Area Chart com Curva Verde Suave */}
+          {/* SVG Area Chart com Curva Verde Suave & Ponto Pulsante */}
           <div style={{ height: '94px', width: '100%', position: 'relative' }}>
             <svg viewBox="0 0 720 120" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
               <defs>
@@ -631,7 +654,7 @@ export default function DashboardPage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-              <circle cx="720" cy="18" r="3.5" fill="var(--accent-green)" />
+              <circle cx="720" cy="18" r="4" fill="var(--accent-green)" className="chart-pulsing-dot" />
             </svg>
           </div>
 
@@ -700,13 +723,13 @@ export default function DashboardPage() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-            <div style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
+            <div className="vance-interactive-tile" style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>Investido</div>
               <div className="tnum" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-main)', marginTop: '2px' }}>
                 R$ 17.450,00
               </div>
             </div>
-            <div style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
+            <div className="vance-interactive-tile" style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>Em Aberto</div>
               <div className="tnum" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-main)', marginTop: '2px' }}>
                 R$ 12.850,00
@@ -715,13 +738,13 @@ export default function DashboardPage() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-            <div style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
+            <div className="vance-interactive-tile" style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>Retorno Projetado</div>
               <div className="tnum" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--accent-green)', marginTop: '2px' }}>
                 R$ 3.800,00
               </div>
             </div>
-            <div style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
+            <div className="vance-interactive-tile" style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>Em Atraso</div>
               <div className="tnum" style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-main)', marginTop: '2px' }}>
                 R$ 600,00
@@ -729,13 +752,14 @@ export default function DashboardPage() {
             </div>
           </div>
 
+          {/* Composição com Live Progress Shimmer */}
           <div style={{ backgroundColor: 'var(--bg-surface)', padding: '10px 14px', borderRadius: '14px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px' }}>
               <span style={{ color: 'var(--text-subtle)' }}>Composição</span>
               <span className="tnum" style={{ color: 'var(--text-main)' }}>96,6% Regular • 3,4% Atraso</span>
             </div>
-            <div style={{ height: '5px', backgroundColor: 'var(--bg-card)', borderRadius: 'var(--radius-pill)', overflow: 'hidden', display: 'flex' }}>
-              <div style={{ height: '100%', width: '96.6%', backgroundColor: 'var(--accent-green)' }} />
+            <div style={{ height: '6px', backgroundColor: 'var(--bg-card)', borderRadius: 'var(--radius-pill)', overflow: 'hidden', display: 'flex' }}>
+              <div className="live-progress-fill" style={{ height: '100%', width: '96.6%' }} />
               <div style={{ height: '100%', width: '3.4%', backgroundColor: 'var(--text-main)' }} />
             </div>
           </div>
@@ -773,6 +797,7 @@ export default function DashboardPage() {
             {OVERDUE_DATA.map((client) => (
               <div
                 key={client.id}
+                className="vance-interactive-tile"
                 style={{
                   backgroundColor: 'var(--bg-surface)',
                   borderRadius: '14px',
@@ -830,7 +855,7 @@ export default function DashboardPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
         
         {/* Linha SP 001 */}
-        <div className="vance-card vance-cascade-item delay-10" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div className="vance-card vance-cascade-item delay-10 vance-interactive-tile" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div
@@ -843,13 +868,20 @@ export default function DashboardPage() {
                   placeItems: 'center',
                   fontSize: '11px',
                   color: 'var(--text-main)',
+                  position: 'relative',
                 }}
               >
                 GA
               </div>
               <h3 style={{ fontSize: '14px', margin: 0, fontWeight: 600 }}>SP 001 — Gabriel</h3>
             </div>
-            <span className="vance-badge green" style={{ fontSize: '10px' }}>97,7% em dia</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span className="live-radar" style={{ width: '6px', height: '6px' }}>
+                <span className="live-radar-ping" style={{ width: '12px', height: '12px' }} />
+                <span className="live-radar-core" style={{ width: '5px', height: '5px' }} />
+              </span>
+              <span className="vance-badge green" style={{ fontSize: '10px' }}>97,7% em dia</span>
+            </div>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-muted)' }}>
@@ -857,8 +889,8 @@ export default function DashboardPage() {
             <span className="tnum" style={{ color: 'var(--text-main)', fontWeight: 500 }}>R$ 8.900,00</span>
           </div>
 
-          <div style={{ height: '4px', backgroundColor: 'var(--bg-surface)', borderRadius: 'var(--radius-pill)', overflow: 'hidden' }}>
-            <div style={{ height: '100%', width: '97.7%', backgroundColor: 'var(--accent-green)', borderRadius: 'var(--radius-pill)' }} />
+          <div style={{ height: '5px', backgroundColor: 'var(--bg-surface)', borderRadius: 'var(--radius-pill)', overflow: 'hidden' }}>
+            <div className="live-progress-fill" style={{ width: '97.7%' }} />
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: 'var(--text-subtle)' }}>
@@ -868,7 +900,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Linha SP 002 */}
-        <div className="vance-card vance-cascade-item delay-10" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div className="vance-card vance-cascade-item delay-10 vance-interactive-tile" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div
@@ -887,7 +919,13 @@ export default function DashboardPage() {
               </div>
               <h3 style={{ fontSize: '14px', margin: 0, fontWeight: 600 }}>SP 002 — Juliano</h3>
             </div>
-            <span className="vance-badge green" style={{ fontSize: '10px' }}>95,5% em dia</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span className="live-radar" style={{ width: '6px', height: '6px' }}>
+                <span className="live-radar-ping" style={{ width: '12px', height: '12px' }} />
+                <span className="live-radar-core" style={{ width: '5px', height: '5px' }} />
+              </span>
+              <span className="vance-badge green" style={{ fontSize: '10px' }}>95,5% em dia</span>
+            </div>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-muted)' }}>
@@ -895,8 +933,8 @@ export default function DashboardPage() {
             <span className="tnum" style={{ color: 'var(--text-main)', fontWeight: 500 }}>R$ 8.550,00</span>
           </div>
 
-          <div style={{ height: '4px', backgroundColor: 'var(--bg-surface)', borderRadius: 'var(--radius-pill)', overflow: 'hidden' }}>
-            <div style={{ height: '100%', width: '95.5%', backgroundColor: 'var(--accent-green)', borderRadius: 'var(--radius-pill)' }} />
+          <div style={{ height: '5px', backgroundColor: 'var(--bg-surface)', borderRadius: 'var(--radius-pill)', overflow: 'hidden' }}>
+            <div className="live-progress-fill" style={{ width: '95.5%' }} />
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: 'var(--text-subtle)' }}>
@@ -906,7 +944,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Retenção & Reempréstimos */}
-        <div className="vance-card vance-cascade-item delay-10" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div className="vance-card vance-cascade-item delay-10 vance-interactive-tile" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <svg className="icon-svg icon-sm" viewBox="0 0 24 24">
@@ -922,8 +960,8 @@ export default function DashboardPage() {
             <span className="tnum" style={{ color: 'var(--text-main)', fontWeight: 500 }}>36 de 44</span>
           </div>
 
-          <div style={{ height: '4px', backgroundColor: 'var(--bg-surface)', borderRadius: 'var(--radius-pill)', overflow: 'hidden' }}>
-            <div style={{ height: '100%', width: '82%', backgroundColor: 'var(--accent-green)', borderRadius: 'var(--radius-pill)' }} />
+          <div style={{ height: '5px', backgroundColor: 'var(--bg-surface)', borderRadius: 'var(--radius-pill)', overflow: 'hidden' }}>
+            <div className="live-progress-fill" style={{ width: '82%' }} />
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: 'var(--text-subtle)' }}>
