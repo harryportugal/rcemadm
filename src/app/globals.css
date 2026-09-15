@@ -1,26 +1,842 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
+/* ==========================================================================
+   1. DESIGN SYSTEM TOKENS & CSS VARIABLES (APPLE MINIMALIST + RCEM GREEN ACCENT)
+   ========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* LIGHT THEME (APPLE UNIFIED NEUTRAL PALETTE) - NO HARSH BORDERS */
+  --bg-app: #FFFFFF;
+  --bg-surface: #FFFFFF;
+  --bg-rail: #F5F5F7;
+  --bg-sidebar: #F5F5F7;
+  --bg-card: #F5F5F7;
+  --bg-card-hover: #E8E8ED;
+  --bg-input: #FFFFFF;
+  --bg-active-pill: #E8E8ED;
+  --bg-badge: #E8E8ED;
+  
+  --border-subtle: transparent;
+  --border-input: transparent;
+
+  --text-main: #1D1D1F;
+  --text-muted: #6E6E73;
+  --text-subtle: #86868B;
+  --text-inv: #FFFFFF;
+
+  /* COMPANY GREEN ACCENT (PRESERVED) */
+  --accent-green: #159A6A;
+  --accent-green-dark: #0E5A3F;
+  --accent-green-bg: rgba(21, 154, 106, 0.10);
+  --accent-green-border: transparent;
+  --lime: #C8F86E;
+
+  /* STATUS COLORS (MONOCHROMATIC WITH GREEN AS ONLY CHROMATIC ACCENT) */
+  --pos: #159A6A;
+  --pos-bg: rgba(21, 154, 106, 0.10);
+  --warn: #6E6E73;
+  --warn-bg: #E8E8ED;
+  --neg: #1D1D1F;
+  --neg-bg: #E8E8ED;
+  --info: #1D1D1F;
+  --info-bg: #E8E8ED;
+
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  --transition-fast: 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+/* ==========================================================================
+   2. BASE RESET & SCROLLBAR SUPPRESSION (STRICTLY NO BOLD)
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family) !important;
+  font-weight: 400 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* TYPOGRAPHY SCALE (CLEAN NON-BOLD 400/500 WEIGHT MAXIMUM, NO BOLD) */
+h1 {
+  font-size: 22px;
+  font-weight: 500 !important;
+  color: var(--text-main);
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 500 !important;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 14.5px;
+  font-weight: 500 !important;
+  color: var(--text-main);
+}
+
+h4 {
+  font-size: 13px;
+  font-weight: 500 !important;
+  color: var(--text-main);
+}
+
+strong, b, .font-medium, button {
+  font-weight: 500 !important;
+  color: var(--text-main);
+}
+
+.font-bold, .font-semibold, .font-extrabold {
+  font-weight: 500 !important;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-weight: 400 !important;
+}
+
+/* ==========================================================================
+   3. APP SHELL LAYOUT (FRAME + RAIL + SIDEBAR + WORKSPACE)
+   ========================================================================== */
+.kb-app-frame {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-surface);
+  overflow: hidden;
+  padding: 8px 12px;
+  gap: 12px;
+}
+
+/* 3.1 LEFTMOST ICON RAIL (56px) */
+.kb-rail {
+  width: 56px;
+  background-color: var(--bg-sidebar);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  gap: 16px;
+  flex-shrink: 0;
+  margin: 4px 0;
+  height: calc(100vh - 24px);
+  overflow-y: auto;
+  border: none !important;
+  animation: vanceSlideRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.kb-rail-logo {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--text-main);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast);
+}
+
+.kb-rail-logo:hover {
+  transform: scale(1.05);
+}
+
+.kb-rail-item {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.kb-rail-item:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-main);
+}
+
+.kb-rail-item.active {
+  background-color: var(--bg-active-pill);
+  color: var(--accent-green);
+}
+
+/* 3.2 SECONDARY SIDEBAR TREE VIEW (256px) */
+.kb-sidebar-tree {
+  width: 256px;
+  background-color: var(--bg-sidebar);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+  gap: 14px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  margin: 4px 0;
+  height: calc(100vh - 24px);
+  border: none !important;
+  animation: vanceSlideRight 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.kb-sidebar-tree.collapsed {
+  width: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.kb-tree-node {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: background-color var(--transition-fast);
+  text-decoration: none;
+  font-weight: 400 !important;
+}
+
+.kb-tree-node:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.kb-tree-node.selected {
+  background-color: var(--bg-active-pill);
+  font-weight: 500 !important;
+  color: var(--text-main);
+}
+
+.kb-node-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kb-sub-tree {
+  margin-left: 18px;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  padding-left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* 3.3 MAIN WORKSPACE AREA */
+.kb-main-workspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  overflow-y: auto;
+  height: calc(100vh - 16px);
+}
+
+.kb-main-inner {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   4. COMPONENT DESIGN SYSTEM (CARDS, BUTTONS, INPUTS, BADGES)
+   ========================================================================== */
+
+/* 4.1 BADGES & PILLS */
+.kb-badge, .vance-badge {
+  font-size: 11px;
+  color: var(--text-muted);
+  background-color: var(--bg-badge);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-weight: 500 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  border: none !important;
+}
+
+.kb-badge.active, .vance-badge.active {
+  background-color: var(--text-main);
+  color: var(--text-inv);
+}
+
+.kb-badge.green, .vance-badge.green {
+  background-color: var(--accent-green-bg);
+  color: var(--accent-green);
+  border: none !important;
+}
+
+.kb-badge.warn, .vance-badge.warn {
+  background-color: var(--bg-badge);
+  color: var(--text-muted);
+}
+
+.kb-badge.neg, .vance-badge.neg {
+  background-color: var(--bg-badge);
+  color: var(--text-main);
+}
+
+.vance-badge.muted {
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+}
+
+/* 4.2 HIGH-END EXPANDING BADGE BUTTON */
+.vance-getstarted-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px 10px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500 !important;
+  cursor: pointer;
+  border: none !important;
+  outline: none;
+  overflow: hidden;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  min-height: 40px;
+  text-decoration: none;
+  user-select: none;
+}
+
+.vance-getstarted-btn.primary {
+  background-color: var(--accent-green);
+  color: #FFFFFF;
+}
+
+.vance-getstarted-text {
+  margin-right: 28px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: 500 !important;
+}
+
+.vance-getstarted-badge {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  border-radius: var(--radius-pill);
+  width: 32px;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.06);
+  color: var(--text-main);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 10;
+}
+
+.vance-getstarted-btn.primary .vance-getstarted-badge {
+  background-color: #FFFFFF;
+  color: var(--accent-green);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.vance-getstarted-btn:hover {
+  transform: translateY(-1px);
+}
+
+.vance-getstarted-btn:hover .vance-getstarted-text {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.vance-getstarted-btn:hover .vance-getstarted-badge {
+  width: calc(100% - 8px);
+  background-color: var(--text-main);
+  color: var(--text-inv);
+}
+
+.vance-getstarted-btn.primary:hover .vance-getstarted-badge {
+  background-color: #FFFFFF;
+  color: var(--accent-green);
+}
+
+.vance-getstarted-btn:active {
+  transform: scale(0.96);
+}
+
+/* 4.3 ROUND ICON BUTTON */
+.vance-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-surface);
+  border: none !important;
+  outline: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--text-main);
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.vance-icon-btn:hover {
+  background-color: var(--text-main);
+  color: var(--text-inv);
+  transform: translateY(-1px) scale(1.04);
+}
+
+.vance-icon-btn:active {
+  transform: scale(0.92);
+}
+
+/* 4.4 STANDARD BUTTONS */
+.vance-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500 !important;
+  cursor: pointer;
+  border: none !important;
+  outline: none;
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.vance-btn:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.vance-btn.primary {
+  background-color: var(--accent-green);
+  color: #FFFFFF;
+}
+
+.vance-btn.primary:hover {
+  opacity: 0.92;
+  filter: brightness(1.05);
+}
+
+.vance-btn.dark {
+  background-color: var(--text-main);
+  color: var(--text-inv);
+}
+
+.vance-btn.sm {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+/* 4.5 INPUTS & FORMS */
+.vance-input, .vance-select, .vance-textarea {
+  width: 100%;
+  background-color: var(--bg-surface);
+  border: none !important;
+  border-radius: var(--radius-pill);
+  padding: 10px 18px;
+  color: var(--text-main);
+  font-size: 13px;
+  outline: none;
+  font-weight: 400 !important;
+  transition: background-color var(--transition-fast);
+}
+
+.vance-textarea {
+  border-radius: var(--radius-lg);
+  resize: vertical;
+  min-height: 90px;
+}
+
+.vance-input:focus, .vance-select:focus, .vance-textarea:focus {
+  background-color: var(--bg-surface);
+}
+
+/* 4.6 CARDS (PURE CLEAN, NO BORDER / NO OUTLINE) */
+.vance-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  border: none !important;
+}
+
+/* 4.6.1 POPOVERS & ELEVATED DROPDOWNS */
+.vance-popover {
+  background-color: var(--bg-surface);
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.14) !important;
+  border-radius: var(--radius-xl);
+}
+
+/* Micro-card white tile (NO BORDER) */
+.vance-tile {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  border: none !important;
+  transition: all var(--transition-fast);
+}
+
+.vance-tile:hover {
+  transform: translateY(-1px);
+}
+
+/* 4.7 TABLES (CLEAN NO BORDER) */
+.vance-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-surface);
+  border: none !important;
+}
+
+.vance-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.vance-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  background-color: var(--bg-card);
+}
+
+.vance-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  color: var(--text-main);
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.vance-table tr:last-child td {
+  border-bottom: none;
+}
+
+.vance-table tbody tr:hover td {
+  background-color: var(--bg-card-hover);
+}
+
+/* ==========================================================================
+   5. CASCADING ANIMATIONS
+   ========================================================================== */
+@keyframes vanceCascadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes vanceFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes vanceSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.vance-cascade-item {
+  opacity: 0;
+  animation: vanceCascadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: vanceCascadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.03s !important; }
+.delay-2 { animation-delay: 0.06s !important; }
+.delay-3 { animation-delay: 0.09s !important; }
+.delay-4 { animation-delay: 0.12s !important; }
+.delay-5 { animation-delay: 0.15s !important; }
+.delay-6 { animation-delay: 0.18s !important; }
+.delay-7 { animation-delay: 0.21s !important; }
+.delay-8 { animation-delay: 0.24s !important; }
+.delay-9 { animation-delay: 0.27s !important; }
+.delay-10 { animation-delay: 0.30s !important; }
+
+/* UTILITY ICONS */
+.icon-svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.75;
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.icon-sm { width: 14px; height: 14px; }
+.icon-xs { width: 12px; height: 12px; }
+.icon-lg { width: 22px; height: 22px; }
+
+/* ==========================================================================
+   8. RESPONSIVE BREAKPOINTS & MOBILE ENGINE
+   ========================================================================== */
+
+/* Mobile Backdrop for Drawer */
+.kb-mobile-backdrop {
+  display: none;
+}
+
+/* TABLET (<= 1024px) */
+@media (max-width: 1024px) {
+  .kb-app-frame {
+    padding: 6px 8px;
+    gap: 8px;
+  }
+  .kb-sidebar-tree {
+    position: fixed;
+    left: 72px;
+    top: 8px;
+    bottom: 8px;
+    z-index: 90;
+    box-shadow: 6px 0 24px rgba(0, 0, 0, 0.08);
+  }
+  .kb-sidebar-tree.collapsed {
+    left: -320px;
+  }
+}
+
+/* MOBILE & SMALL TABLET (<= 768px) */
+@media (max-width: 768px) {
+  .kb-app-frame {
+    padding: 0 !important;
+    gap: 0 !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    width: 100vw !important;
+  }
+
+  .kb-rail {
+    display: none !important;
+  }
+
+  /* Mobile Backdrop */
+  .kb-mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .kb-mobile-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Mobile Slide-Out Drawer */
+  .kb-sidebar-tree {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    width: 290px !important;
+    max-width: 86vw !important;
+    border-radius: 0 22px 22px 0 !important;
+    z-index: 1000 !important;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.18) !important;
+    transform: translateX(0) !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    background-color: var(--bg-card) !important;
+    padding: 20px 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .kb-sidebar-tree.collapsed {
+    transform: translateX(-105%) !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    width: 290px !important;
+  }
+
+  /* Main Workspace */
+  .kb-main-workspace {
+    padding: 14px 12px 28px 12px !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .vance-card {
+    padding: 18px 14px !important;
+    border-radius: 16px !important;
+    gap: 16px !important;
+  }
+
+  /* Hero Banner Padding & Structure */
+  .vance-hero-card {
+    padding: 20px 16px !important;
+  }
+
+  h1 {
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+  }
+
+  h2 {
+    font-size: 15px !important;
+  }
+
+  /* Cards & Grid Wrapping */
+  .vance-grid-responsive {
+    grid-template-columns: 1fr !important;
+  }
+
+  .vance-tile {
+    padding: 12px 14px !important;
+  }
+}
+
+/* SMALL PHONES (<= 480px) */
+@media (max-width: 480px) {
+  .kb-main-workspace {
+    padding: 10px 10px 24px 10px !important;
+  }
+
+  .vance-card {
+    padding: 16px 12px !important;
+    border-radius: 14px !important;
+  }
+
+  /* Full-width responsive button controls */
+  .vance-getstarted-btn {
+    padding: 8px 16px 8px 14px;
+    font-size: 12.5px;
+  }
+
+  .vance-input, .vance-select {
+    padding: 10px 12px !important;
+    font-size: 13px !important;
+  }
+
+  /* Stacked multi-column forms to single column on small phones */
+  div[style*="gridTemplateColumns: '1fr 1fr'"],
+  div[style*="gridTemplateColumns: 'repeat(2, 1fr)'"],
+  div[style*="grid-template-columns: 1fr 1fr"],
+  div[style*="grid-template-columns: repeat(2, 1fr)"],
+  div[style*="gridTemplateColumns: '1fr 1fr 1fr'"],
+  div[style*="grid-template-columns: 1fr 1fr 1fr"],
+  div[style*="gridTemplateColumns: 'repeat(3, 1fr)'"],
+  div[style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* MOBILE BOTTOM SHEET FOR ALL MODALS */
+@media (max-width: 640px) {
+  .vance-modal-backdrop {
+    padding: 0 !important;
+    align-items: flex-end !important;
+  }
+
+  .vance-modal-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 90vh !important;
+    max-height: 90dvh !important;
+    border-radius: 24px 24px 0 0 !important;
+    padding: 20px 16px 32px 16px !important;
+    animation: vanceSlideUpModal 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  }
+}
+
+@keyframes vanceSlideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
