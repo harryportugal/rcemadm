@@ -840,3 +840,45 @@ strong, b, .font-medium, button {
     transform: translateY(0);
   }
 }
+
+/* ==========================================================================
+   8. PIX TRANSFER BEAM ANIMATION (EMERALD GREEN ACCENT)
+   ========================================================================== */
+.pix-beam-bar {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.pix-beam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  background: linear-gradient(90deg, transparent 0%, rgba(21, 154, 106, 0.45) 50%, transparent 100%);
+  pointer-events: none;
+  animation: transferBeam 2.4s ease-in-out infinite;
+}
+
+@keyframes transferBeam {
+  0% {
+    left: -35%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 115%;
+    opacity: 0;
+  }
+}
+

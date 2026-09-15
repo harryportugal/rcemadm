@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useFilters } from '@/context/FilterContext';
+import { PixTransferCard } from '@/components/dashboard/PixTransferCard';
 
 interface OverdueClient {
   id: string;
@@ -598,12 +599,16 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div style={{ backgroundColor: 'var(--bg-surface)', padding: '10px 14px', borderRadius: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '12px', color: 'var(--text-subtle)' }}>Total Recebido</span>
-            <div className="tnum" style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-main)' }}>
-              R$ 4.250,00 <span className="vance-badge green" style={{ fontSize: '10px', marginLeft: '4px' }}>+136%</span>
-            </div>
-          </div>
+          {/* Card de Liquidação Pix Animado com Feixe de Luz Verde */}
+          <PixTransferCard
+            title="Última Liquidação Pix"
+            amount="R$ 4.250"
+            cents=",00"
+            time="Hoje, 16:42"
+            senderName="RCEM B2B"
+            receiverName="Parceiro SP-01"
+            receiverBadge="P"
+          />
 
           {/* SVG Area Chart com Curva Verde Suave */}
           <div style={{ height: '94px', width: '100%', position: 'relative' }}>
