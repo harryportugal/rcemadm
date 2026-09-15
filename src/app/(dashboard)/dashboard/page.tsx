@@ -179,7 +179,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Global Regularity Indicator */}
+        {/* Global Regularity Indicator with Animated Light Beam */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '13px' }}>
             <span style={{ color: 'var(--text-muted)' }}>Regularidade da Carteira</span>
@@ -189,10 +189,11 @@ export default function DashboardPage() {
           </div>
           <div
             style={{
-              height: '6px',
+              height: '7px',
               backgroundColor: 'var(--bg-surface)',
               borderRadius: 'var(--radius-pill)',
               overflow: 'hidden',
+              position: 'relative',
             }}
           >
             <div
@@ -201,9 +202,13 @@ export default function DashboardPage() {
                 width: '96.6%',
                 backgroundColor: 'var(--accent-green)',
                 borderRadius: 'var(--radius-pill)',
+                position: 'relative',
+                overflow: 'hidden',
                 transition: 'width 0.6s cubic-bezier(0.25, 1, 0.5, 1)',
               }}
-            />
+            >
+              <div className="hero-progress-beam" />
+            </div>
           </div>
         </div>
 
