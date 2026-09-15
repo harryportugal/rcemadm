@@ -15,7 +15,11 @@ export const metadata: Metadata = {
   title: 'RCEM · Painel Administrativo',
   description: 'Sistema administrativo e financeiro de microcrédito e cobrança RCEM',
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/icon.svg',
   },
 };
 

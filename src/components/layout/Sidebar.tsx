@@ -29,7 +29,7 @@ export function Sidebar({ collapsed, onToggleCollapse }: SidebarProps) {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, width: '100%' }}>
           {/* REAL RCEM LOGO MARK */}
           <Link href="/dashboard" className="kb-rail-logo" title="RCEM — Início">
-            <RcemMark size={36} bgColor="var(--bg-surface)" color="var(--accent-green)" />
+            <RcemMark size={36} bgColor="#FFFFFF" color="var(--accent-green)" />
           </Link>
 
           {/* TOGGLE SIDEBAR BUTTON */}
