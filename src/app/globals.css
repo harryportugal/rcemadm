@@ -860,7 +860,7 @@ strong, b, .font-medium, button {
 }
 
 /* ==========================================================================
-   8. PIX TRANSFER & HERO PROGRESS BEAM ANIMATIONS (EMERALD GREEN ACCENT)
+   8. PIX TRANSFER BEAM ANIMATION (EMERALD GREEN ACCENT)
    ========================================================================== */
 .pix-beam-bar {
   position: relative;
@@ -877,52 +877,25 @@ strong, b, .font-medium, button {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 160px;
-  background: linear-gradient(90deg, transparent 0%, rgba(21, 154, 106, 0.10) 18%, rgba(21, 154, 106, 0.38) 50%, rgba(21, 154, 106, 0.10) 82%, transparent 100%);
+  width: 120px;
+  background: linear-gradient(90deg, transparent 0%, rgba(21, 154, 106, 0.45) 50%, transparent 100%);
   pointer-events: none;
-  animation: transferBeam 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: transferBeam 2.4s ease-in-out infinite;
 }
 
 @keyframes transferBeam {
   0% {
-    left: -45%;
+    left: -35%;
     opacity: 0;
   }
-  18% {
+  15% {
     opacity: 1;
   }
-  82% {
+  85% {
     opacity: 1;
   }
   100% {
-    left: 125%;
-    opacity: 0;
-  }
-}
-
-.hero-progress-beam {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 140px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 20%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.12) 80%, transparent 100%);
-  pointer-events: none;
-  animation: heroProgressBeam 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-@keyframes heroProgressBeam {
-  0% {
-    left: -45%;
-    opacity: 0;
-  }
-  18% {
-    opacity: 1;
-  }
-  82% {
-    opacity: 1;
-  }
-  100% {
-    left: 125%;
+    left: 115%;
     opacity: 0;
   }
 }

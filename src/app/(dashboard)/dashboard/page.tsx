@@ -179,7 +179,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Global Regularity Indicator with Animated Light Beam */}
+        {/* Global Regularity Indicator */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '13px' }}>
             <span style={{ color: 'var(--text-muted)' }}>Regularidade da Carteira</span>
@@ -189,11 +189,10 @@ export default function DashboardPage() {
           </div>
           <div
             style={{
-              height: '7px',
+              height: '6px',
               backgroundColor: 'var(--bg-surface)',
               borderRadius: 'var(--radius-pill)',
               overflow: 'hidden',
-              position: 'relative',
             }}
           >
             <div
@@ -202,13 +201,9 @@ export default function DashboardPage() {
                 width: '96.6%',
                 backgroundColor: 'var(--accent-green)',
                 borderRadius: 'var(--radius-pill)',
-                position: 'relative',
-                overflow: 'hidden',
                 transition: 'width 0.6s cubic-bezier(0.25, 1, 0.5, 1)',
               }}
-            >
-              <div className="hero-progress-beam" />
-            </div>
+            />
           </div>
         </div>
 
@@ -401,7 +396,7 @@ export default function DashboardPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
         
         {/* CHECKLIST / KYC CARD */}
-        <div className="vance-card vance-cascade-item delay-6" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div className="vance-card vance-cascade-item delay-6" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <svg className="icon-svg icon-sm" viewBox="0 0 24 24">
@@ -457,6 +452,20 @@ export default function DashboardPage() {
               </button>
             </div>
           </div>
+
+          {/* Mock Animado de Desembolso / Aprovação KYC */}
+          <PixTransferCard
+            title="Desembolso Pix Aprovado"
+            amount="R$ 1.200"
+            cents=",00"
+            time="Hoje, 17:15"
+            statusBadgeText="Liberado"
+            senderName="RCEM Fundo"
+            senderIsRcem={true}
+            receiverName="Henrique J."
+            receiverBadge="HJ"
+            receiverIsRcem={false}
+          />
 
           {/* Compact Item List */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -613,9 +622,12 @@ export default function DashboardPage() {
             amount="R$ 4.250"
             cents=",00"
             time="Hoje, 16:42"
+            statusBadgeText="Instantâneo"
             senderName="RCEM B2B"
+            senderIsRcem={true}
             receiverName="Parceiro SP-01"
             receiverBadge="P"
+            receiverIsRcem={false}
           />
 
           {/* SVG Area Chart com Curva Verde Suave - Bleed Edge-to-Edge */}
@@ -666,7 +678,7 @@ export default function DashboardPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
         
         {/* RESUMO FINANCEIRO DA CARTEIRA */}
-        <div className="vance-card vance-cascade-item delay-8" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div className="vance-card vance-cascade-item delay-8" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <svg className="icon-svg icon-sm" viewBox="0 0 24 24">
@@ -679,6 +691,20 @@ export default function DashboardPage() {
               Extrato →
             </Link>
           </div>
+
+          {/* Mock Animado de Repasse da Carteira */}
+          <PixTransferCard
+            title="Repasse Automático Efetuado"
+            amount="R$ 3.800"
+            cents=",00"
+            time="Hoje, 15:30"
+            statusBadgeText="Projetado 100%"
+            senderName="Linha SP-001"
+            senderBadge="GA"
+            senderIsRcem={false}
+            receiverName="RCEM Painel"
+            receiverIsRcem={true}
+          />
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
             <div style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
@@ -749,6 +775,21 @@ export default function DashboardPage() {
               Ver todos →
             </Link>
           </div>
+
+          {/* Mock Animado de Acordo Quitado */}
+          <PixTransferCard
+            title="Acordo Pix Quitado"
+            amount="R$ 320"
+            cents=",00"
+            time="Hoje, 14:10"
+            statusBadgeText="Recuperado"
+            senderName="Marcos V."
+            senderBadge="MV"
+            senderIsRcem={false}
+            receiverName="Cobrança GA"
+            receiverBadge="GA"
+            receiverIsRcem={false}
+          />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {OVERDUE_DATA.map((client) => (
