@@ -536,7 +536,10 @@ export default function DashboardPage() {
         </div>
 
         {/* FLUXO DE CAIXA DIÁRIO COM CURVA VERDE */}
-        <div className="vance-card vance-cascade-item delay-7" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div
+          className="vance-card vance-cascade-item delay-7"
+          style={{ display: 'flex', flexDirection: 'column', gap: '16px', overflow: 'hidden' }}
+        >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <svg className="icon-svg icon-sm" viewBox="0 0 24 24">
@@ -610,12 +613,12 @@ export default function DashboardPage() {
             receiverBadge="P"
           />
 
-          {/* SVG Area Chart com Curva Verde Suave */}
-          <div style={{ height: '94px', width: '100%', position: 'relative' }}>
-            <svg viewBox="0 0 720 120" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
+          {/* SVG Area Chart com Curva Verde Suave - Bleed Edge-to-Edge */}
+          <div className="vance-card-bleed" style={{ height: '100px', position: 'relative', overflow: 'hidden', margin: '4px -24px' }}>
+            <svg viewBox="0 0 720 120" preserveAspectRatio="none" style={{ width: '100%', height: '100%', display: 'block' }}>
               <defs>
                 <linearGradient id="vanceCashGradGreen" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="var(--accent-green)" stopOpacity="0.22" />
+                  <stop offset="0%" stopColor="var(--accent-green)" stopOpacity="0.25" />
                   <stop offset="100%" stopColor="var(--accent-green)" stopOpacity="0.0" />
                 </linearGradient>
               </defs>
@@ -627,11 +630,10 @@ export default function DashboardPage() {
                 d="M0,70 L24.8,55 L49.7,75 L74.5,90 L99.3,65 L124.1,38 L149,50 L173.8,60 L198.6,45 L223.4,70 L248.3,85 L273.1,48 L297.9,28 L322.8,42 L347.6,55 L372.4,38 L397.2,65 L422.1,80 L446.9,40 L471.7,18 L496.6,34 L521.4,45 L546.2,26 L571,58 L595.9,75 L620.7,42 L645.5,12 L670.3,26 L695.2,38 L720,18"
                 fill="none"
                 stroke="var(--accent-green)"
-                strokeWidth="2.2"
+                strokeWidth="2.4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-              <circle cx="720" cy="18" r="3.5" fill="var(--accent-green)" />
             </svg>
           </div>
 
