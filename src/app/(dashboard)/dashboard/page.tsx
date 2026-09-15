@@ -127,7 +127,7 @@ export default function DashboardPage() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       
       {/* ====================================================================
-           1. HERO OVERVIEW CARD (APPLE MINIMALIST DESIGN - MONOCHROMATIC + GREEN)
+           1. HERO OVERVIEW CARD (HIGH-END VANCE DESIGN SYSTEM + ANIMATED BEAM)
            ==================================================================== */}
       <div
         className="vance-card vance-hero-card vance-cascade-item delay-1"
@@ -136,8 +136,13 @@ export default function DashboardPage() {
           display: 'flex',
           flexDirection: 'column',
           gap: '20px',
+          position: 'relative',
+          overflow: 'hidden',
+          backgroundColor: 'var(--bg-card)',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
         }}
       >
+        {/* Top Row: Greeting & Action Buttons */}
         <div
           style={{
             display: 'flex',
@@ -148,11 +153,44 @@ export default function DashboardPage() {
           }}
         >
           <div>
-            <h1 style={{ fontSize: '24px', margin: 0, fontWeight: 600 }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '3px 10px',
+                borderRadius: 'var(--radius-pill)',
+                backgroundColor: 'var(--accent-green-bg)',
+                color: 'var(--accent-green)',
+                fontSize: '11px',
+                fontWeight: 500,
+                marginBottom: '6px',
+              }}
+            >
+              <span
+                className="animate-pulse-dot"
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--accent-green)',
+                }}
+              />
+              <span>Operação Ativa · {selectedMonth}</span>
+            </div>
+            <h1
+              style={{
+                fontSize: '26px',
+                margin: 0,
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
+                color: 'var(--text-main)',
+              }}
+            >
               Olá, Henrique
             </h1>
-            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px', margin: 0 }}>
-              88 Contratos Ativos • {selectedMonth}
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '3px', margin: 0 }}>
+              88 Contratos Ativos sob gestão regular da carteira
             </p>
           </div>
 
@@ -162,7 +200,7 @@ export default function DashboardPage() {
               <span className="vance-getstarted-text">Recebimento</span>
               <span className="vance-getstarted-badge">
                 <svg className="icon-svg icon-sm" viewBox="0 0 24 24">
-                  <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1 2-1V2l-2 1-2-1-2 1-2-1-2 1-2-1z" />
+                  <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1V2l-2 1-2-1-2 1-2-1-2 1-2-1z" />
                   <path d="m9 12 2 2 4-4" />
                 </svg>
               </span>
@@ -179,35 +217,75 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Global Regularity Indicator */}
+        {/* Dynamic Regularity Track with Embedded Green Energy Beam */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '13px' }}>
-            <span style={{ color: 'var(--text-muted)' }}>Regularidade da Carteira</span>
-            <span className="tnum" style={{ color: 'var(--accent-green)', fontWeight: 500 }}>
-              96,6% em dia
-            </span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12.5px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div
+                style={{
+                  width: '18px',
+                  height: '18px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--accent-green)',
+                  color: '#FFFFFF',
+                  display: 'grid',
+                  placeItems: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <span style={{ fontWeight: 500, color: 'var(--text-main)' }}>Regularidade da Carteira</span>
+              <span style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>• Índice Operacional</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span className="vance-badge green" style={{ fontSize: '10px', padding: '2px 8px' }}>
+                Excelente
+              </span>
+              <span className="tnum" style={{ fontSize: '13px', fontWeight: 600, color: 'var(--accent-green)' }}>
+                96,6% em dia
+              </span>
+            </div>
           </div>
+
+          {/* Animated Glowing Progress Track */}
           <div
             style={{
-              height: '6px',
+              position: 'relative',
+              height: '8px',
               backgroundColor: 'var(--bg-surface)',
               borderRadius: 'var(--radius-pill)',
               overflow: 'hidden',
+              boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.04)',
             }}
           >
             <div
               style={{
+                position: 'relative',
                 height: '100%',
                 width: '96.6%',
                 backgroundColor: 'var(--accent-green)',
                 borderRadius: 'var(--radius-pill)',
-                transition: 'width 0.6s cubic-bezier(0.25, 1, 0.5, 1)',
+                overflow: 'hidden',
               }}
-            />
+            >
+              <div className="pix-beam" style={{ opacity: 0.85 }} />
+            </div>
           </div>
         </div>
 
-        {/* 4 Micro-Tiles Grid (Pure White, Borderless, No-Wrap Layout) */}
+        {/* 4 Micro-Tiles Grid (High-End Styled Cards from Mock) */}
         <div
           className="vance-hero-tiles"
           style={{
@@ -220,23 +298,12 @@ export default function DashboardPage() {
           }}
         >
           {/* Tile 1: Próximo Vencimento */}
-          <div
-            className="vance-cascade-item delay-2"
-            style={{
-              backgroundColor: 'var(--bg-surface)',
-              padding: '12px 14px',
-              borderRadius: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              minWidth: 0,
-            }}
-          >
+          <div className="hero-kpi-tile vance-cascade-item delay-2">
             <div
               style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
                 backgroundColor: 'var(--bg-card)',
                 display: 'grid',
                 placeItems: 'center',
@@ -256,34 +323,23 @@ export default function DashboardPage() {
                 <span style={{ fontSize: '11px', color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>
                   Próximo Vencimento
                 </span>
-                <span className="vance-badge muted" style={{ fontSize: '9.5px', padding: '2px 7px', lineHeight: 1.2 }}>
+                <span className="vance-badge muted" style={{ fontSize: '9px', padding: '1px 6px' }}>
                   6 contratos
                 </span>
               </div>
-              <div className="tnum" style={{ fontSize: '13px', color: 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                18/07/2026 · R$ 1.200,00
+              <div className="tnum" style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                R$ 1.200<span style={{ fontSize: '11.5px', fontWeight: 400, color: 'var(--text-subtle)' }}>,00</span> <span style={{ fontSize: '11px', color: 'var(--text-subtle)', fontWeight: 400 }}>· 18/07</span>
               </div>
             </div>
           </div>
 
           {/* Tile 2: Linhas de Cobrança */}
-          <div
-            className="vance-cascade-item delay-3"
-            style={{
-              backgroundColor: 'var(--bg-surface)',
-              padding: '12px 14px',
-              borderRadius: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              minWidth: 0,
-            }}
-          >
+          <Link href="/relatorios/linhas" className="hero-kpi-tile vance-cascade-item delay-3">
             <div
               style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
                 backgroundColor: 'var(--bg-card)',
                 display: 'grid',
                 placeItems: 'center',
@@ -296,36 +352,28 @@ export default function DashboardPage() {
                 <polyline points="16 7 22 7 22 13" />
               </svg>
             </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>
-                Linhas Operacionais
+            <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '11px', color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>
+                  Linhas Ativas
+                </span>
+                <span className="vance-badge green" style={{ fontSize: '9px', padding: '1px 6px' }}>
+                  SP-01 · 02
+                </span>
               </div>
-              <div style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-main)', whiteSpace: 'nowrap' }}>
-                SP 001 & 002 (GA • JU)
+              <div className="tnum" style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--text-main)', whiteSpace: 'nowrap' }}>
+                2 Linhas <span style={{ fontSize: '11px', color: 'var(--text-subtle)', fontWeight: 400 }}>· GA & JU</span>
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Tile 3: Pendências KYC */}
-          <Link
-            href="/solicitacoes"
-            className="vance-cascade-item delay-4"
-            style={{
-              backgroundColor: 'var(--bg-surface)',
-              padding: '12px 14px',
-              borderRadius: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              textDecoration: 'none',
-              minWidth: 0,
-            }}
-          >
+          <Link href="/solicitacoes" className="hero-kpi-tile vance-cascade-item delay-4">
             <div
               style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
                 backgroundColor: 'var(--bg-card)',
                 display: 'grid',
                 placeItems: 'center',
@@ -338,34 +386,28 @@ export default function DashboardPage() {
                 <path d="m9 12 2 2 4-4" />
               </svg>
             </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>
-                Fila KYC
+            <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '11px', color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>
+                  Fila KYC
+                </span>
+                <span className="vance-badge warn" style={{ fontSize: '9px', padding: '1px 6px' }}>
+                  Prioridade
+                </span>
               </div>
-              <div className="tnum" style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-main)', whiteSpace: 'nowrap' }}>
-                3 pendentes
+              <div className="tnum" style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--text-main)', whiteSpace: 'nowrap' }}>
+                3 Pendentes <span style={{ fontSize: '11px', color: 'var(--text-subtle)', fontWeight: 400 }}>· ~3,2h</span>
               </div>
             </div>
           </Link>
 
           {/* Tile 4: Volume Liquidado Hoje */}
-          <div
-            className="vance-cascade-item delay-5"
-            style={{
-              backgroundColor: 'var(--bg-surface)',
-              padding: '12px 14px',
-              borderRadius: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              minWidth: 0,
-            }}
-          >
+          <Link href="/financeiro/recebimentos" className="hero-kpi-tile vance-cascade-item delay-5">
             <div
               style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
                 backgroundColor: 'var(--accent-green-bg)',
                 display: 'grid',
                 placeItems: 'center',
@@ -378,15 +420,20 @@ export default function DashboardPage() {
                 <path d="M12 6v6l4 2" />
               </svg>
             </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: '11px', color: 'var(--text-subtle)' }}>
-                Liquidado Hoje
+            <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '11px', color: 'var(--text-subtle)', whiteSpace: 'nowrap' }}>
+                  Liquidado Hoje
+                </span>
+                <span className="vance-badge green" style={{ fontSize: '9px', padding: '1px 6px' }}>
+                  Instantâneo
+                </span>
               </div>
-              <div className="tnum" style={{ fontSize: '13px', fontWeight: 500, color: 'var(--accent-green)', whiteSpace: 'nowrap' }}>
-                R$ 1.850,00
+              <div className="tnum" style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--accent-green)', whiteSpace: 'nowrap' }}>
+                R$ 1.850<span style={{ fontSize: '11.5px', fontWeight: 400 }}>,00</span>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
 
@@ -396,7 +443,7 @@ export default function DashboardPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
         
         {/* CHECKLIST / KYC CARD */}
-        <div className="vance-card vance-cascade-item delay-6" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <div className="vance-card vance-cascade-item delay-6" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <svg className="icon-svg icon-sm" viewBox="0 0 24 24">
@@ -452,20 +499,6 @@ export default function DashboardPage() {
               </button>
             </div>
           </div>
-
-          {/* Mock Animado de Desembolso / Aprovação KYC */}
-          <PixTransferCard
-            title="Desembolso Pix Aprovado"
-            amount="R$ 1.200"
-            cents=",00"
-            time="Hoje, 17:15"
-            statusBadgeText="Liberado"
-            senderName="RCEM Fundo"
-            senderIsRcem={true}
-            receiverName="Henrique J."
-            receiverBadge="HJ"
-            receiverIsRcem={false}
-          />
 
           {/* Compact Item List */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -622,12 +655,9 @@ export default function DashboardPage() {
             amount="R$ 4.250"
             cents=",00"
             time="Hoje, 16:42"
-            statusBadgeText="Instantâneo"
             senderName="RCEM B2B"
-            senderIsRcem={true}
             receiverName="Parceiro SP-01"
             receiverBadge="P"
-            receiverIsRcem={false}
           />
 
           {/* SVG Area Chart com Curva Verde Suave - Bleed Edge-to-Edge */}
@@ -678,7 +708,7 @@ export default function DashboardPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
         
         {/* RESUMO FINANCEIRO DA CARTEIRA */}
-        <div className="vance-card vance-cascade-item delay-8" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <div className="vance-card vance-cascade-item delay-8" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <svg className="icon-svg icon-sm" viewBox="0 0 24 24">
@@ -691,20 +721,6 @@ export default function DashboardPage() {
               Extrato →
             </Link>
           </div>
-
-          {/* Mock Animado de Repasse da Carteira */}
-          <PixTransferCard
-            title="Repasse Automático Efetuado"
-            amount="R$ 3.800"
-            cents=",00"
-            time="Hoje, 15:30"
-            statusBadgeText="Projetado 100%"
-            senderName="Linha SP-001"
-            senderBadge="GA"
-            senderIsRcem={false}
-            receiverName="RCEM Painel"
-            receiverIsRcem={true}
-          />
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
             <div style={{ backgroundColor: 'var(--bg-surface)', padding: '12px 14px', borderRadius: '14px' }}>
@@ -775,21 +791,6 @@ export default function DashboardPage() {
               Ver todos →
             </Link>
           </div>
-
-          {/* Mock Animado de Acordo Quitado */}
-          <PixTransferCard
-            title="Acordo Pix Quitado"
-            amount="R$ 320"
-            cents=",00"
-            time="Hoje, 14:10"
-            statusBadgeText="Recuperado"
-            senderName="Marcos V."
-            senderBadge="MV"
-            senderIsRcem={false}
-            receiverName="Cobrança GA"
-            receiverBadge="GA"
-            receiverIsRcem={false}
-          />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {OVERDUE_DATA.map((client) => (
